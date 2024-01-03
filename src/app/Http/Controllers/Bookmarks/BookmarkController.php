@@ -168,10 +168,13 @@ class BookmarkController extends Controller
      * @param int $id
      * @return Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function update(UpdateBookmarkRequest $request, int $id)
+    public function update(UpdateBookmarkRequest $request, int $id, UpdateBookmarkUseCase $useCase)
     {
-        $useCase = new UpdateBookmarkUseCase();
-        $useCase->handle($request, $id);
+        $useCase->handle(
+            $id,
+            $request->input('comment'),
+            $request->input('category')
+        );
 
         // 成功時は一覧ページへ
         return redirect('/bookmarks', 302);

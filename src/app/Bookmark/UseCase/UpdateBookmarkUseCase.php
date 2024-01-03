@@ -15,11 +15,12 @@ final class UpdateBookmarkUseCase
      * 本人以外は編集できない
      * ブックマーク後24時間経過したものは編集できない仕様
      *
-     * @param UpdateBookmarkRequest $request
      * @param int $id
+     * @param string $comment
+     * @param int $category
      * @throws ValidationException
      */
-    public function handle(UpdateBookmarkRequest $request, int $id)
+    public function handle(int $id, string $comment, int $category)
     {
         $model = Bookmark::query()->findOrFail($id);
 
@@ -33,8 +34,8 @@ final class UpdateBookmarkUseCase
             abort(403);
         }
 
-        $model->category_id = $request->category;
-        $model->comment = $request->comment;
+        $model->category_id = $category;
+        $model->comment = $comment;
         $model->save();
     }
 }
