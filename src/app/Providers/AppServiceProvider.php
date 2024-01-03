@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Bookmark\UseCase\UpdateBookmarkUseCase;
 use App\Lib\LinkPreview\LinkPreview;
 use App\Lib\LinkPreview\LinkPreviewInterface;
 use Illuminate\Support\ServiceProvider;
